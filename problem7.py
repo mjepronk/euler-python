@@ -1,4 +1,4 @@
-
+# vim: sw=4:ts=4:et:ai
 from eulertools import is_prime
 
 i = 1

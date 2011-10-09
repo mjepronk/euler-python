@@ -1,3 +1,4 @@
+# vim: sw=4:ts=4:et:ai
 import operator
 from functools import reduce
 

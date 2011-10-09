@@ -1,3 +1,4 @@
+# vim: sw=4:ts=4:et:ai
 import math
 
 upper_limit = 1000
