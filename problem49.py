@@ -2,7 +2,7 @@
 # vim: sw=4:ts=4:et:ai
 
 import itertools
-from prime import primes_upto
+from eulertools import primes_upto
 
 results = {}
 for prime in primes_upto(9999):

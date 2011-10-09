@@ -12,7 +12,7 @@ Approach:
 """
 import math
 
-from prime import primes_upto
+from eulertools import primes_upto
 
 def grootste_priemfactor(x):
     """

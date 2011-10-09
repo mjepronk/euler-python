@@ -1,20 +1,6 @@
-#!/bin/python
 # vim: sw=4:ts=4:et:ai
-"""
 
-Problem description:
-
-Approach:
-
-"""
-
-def gcd(a, b):
-    while b > 0:
-        a, b = b, a % b
-    return a
-
-def lcm(a, b):
-    return a * b / gcd(a, b)
+from eulertools import lcm
 
 def main(n):
     """
@@ -29,7 +15,6 @@ def main(n):
     for i in range(2, n+1):
         num = lcm(num, i)
     return num
-
 
 if __name__ == '__main__':
     import doctest

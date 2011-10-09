@@ -1,5 +1,5 @@
 
-from prime import is_prime
+from eulertools import is_prime
 
 i = 1
 count = 0
