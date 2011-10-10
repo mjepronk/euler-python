@@ -44,12 +44,16 @@ def factors(n):
 
     >>> list(factors(1)) 
     [1]
-    >>> list(factors(6)) 
-    [1, 2, 3, 6]
+    >>> list(factors(4)) 
+    [1, 2, 4]
     >>> list(factors(15)) 
     [1, 3, 5, 15]
     >>> list(factors(28)) 
     [1, 2, 4, 7, 14, 28]
+    >>> list(factors(64)) 
+    [1, 2, 4, 8, 16, 32, 64]
+    >>> list(factors(79)) 
+    [1, 79]
     """ 
     top = int(sqrt(n))
     l = []
@@ -57,9 +61,10 @@ def factors(n):
         if n % i  == 0:
             l.append(i)
             yield i
-    if len(l) > 1:
-        for i in reversed(l):
-            yield n // i
+    if top * top == n:
+        l = l[:-1]
+    for i in reversed(l):
+        yield n // i
 
 def num_factors(n):
     """
