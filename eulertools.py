@@ -12,6 +12,17 @@ def lcm(a, b):
     """ Calculate the least common multiple """
     return a * b // gcd(a, b)
 
+def fibonacci(n=4000000):
+    """
+    >>> list(fibonacci(150))
+    [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
+    """
+    yield 1
+    a, b = 1, 2
+    while a < n:
+        yield a
+        a, b = b, a+b
+
 def num_combinations(n, k):
     """
     Calculate the number of combinations

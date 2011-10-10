@@ -1,10 +1,6 @@
 # vim: sw=4:ts=4:et:ai
 
-def fibonacci(n=4000000):
-    a, b = 1, 2
-    while a < n:
-        yield a
-        a, b = b, a+b
+from eulertools import fibonacci
 
 result = sum([i for i in fibonacci() if i % 2 == 0])
 
