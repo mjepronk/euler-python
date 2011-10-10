@@ -12,15 +12,15 @@ def lcm(a, b):
     """ Calculate the least common multiple """
     return a * b // gcd(a, b)
 
-def combinations(n, k):
+def num_combinations(n, k):
     """
     Calculate the number of combinations
     (i.e. a way of selecting several things out of a larger group, where
     (unlike permutations) order does not matter)
 
-    >>> combinations(41, 6)
+    >>> num_combinations(41, 6)
     4496388L
-    >>> combinations(52, 5)
+    >>> num_combinations(52, 5)
     2598960L
     """
     if k > n:
@@ -47,8 +47,7 @@ def factors(n):
             l.append(i)
             yield i
     if len(l) > 1:
-        l.reverse()
-        for i in l:
+        for i in reversed(l):
             yield n // i
 
 def num_factors(n):
@@ -59,8 +58,8 @@ def num_factors(n):
     1
     >>> num_factors(6) 
     4
-    >>> num_factors(15) 
-    4
+    >>> num_factors(16) 
+    5
     >>> num_factors(28)
     6
     """
@@ -89,6 +88,21 @@ def prime_factors(n, largest_to_lowest=False):
     for prime in primes:
         if n % prime == 0:
             yield prime
+
+def prime_factors2(n):
+    """
+    Generator for the prime factors of n
+    """
+    primeind = 0
+    primes = list(primes_upto(int(sqrt(n))))
+    p = primes[primeind]
+    while p <= n:
+        if n % p == 0:
+            yield p
+            n //= p
+        else:
+            primeind += 1
+            p = primes[primeind]
 
 def prime_factors_with_e(n):
     """
