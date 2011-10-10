@@ -1,6 +1,6 @@
 # vim: sw=4:ts=4:et:ai
 from __future__ import division
-from math import sqrt, ceil
+from math import sqrt, ceil, factorial
 
 def gcd(a, b):
     """ Calculate the greatest common divisor """
@@ -11,6 +11,21 @@ def gcd(a, b):
 def lcm(a, b):
     """ Calculate the least common multiple """
     return a * b // gcd(a, b)
+
+def combinations(n, k):
+    """
+    Calculate the number of combinations
+    (i.e. a way of selecting several things out of a larger group, where
+    (unlike permutations) order does not matter)
+
+    >>> combinations(41, 6)
+    4496388L
+    >>> combinations(52, 5)
+    2598960L
+    """
+    if k > n:
+        return 0
+    return factorial(n) // (factorial(n-k) * factorial(k))
 
 def factors(n):
     """ 
