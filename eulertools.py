@@ -7,7 +7,9 @@ def multi_order(a, m):
     """
     Calculate the multiplicative order
 
-    Source: http://rosettacode.org/wiki/Multiplicative_order
+    Sources:
+    http://en.wikipedia.org/wiki/Multiplicative_order
+    http://rosettacode.org/wiki/Multiplicative_order
 
     >>> multi_order(37, 1000)
     100
@@ -22,7 +24,6 @@ def multi_order(a, m):
         for f in prime_factors_with_e(t).iteritems():
             qs = [q * f[0]**j for j in xrange(1+f[1]) for q in qs]
         qs.sort()
-     
         for q in qs:
             if pow(a, q, m) == 1: break
         return q
@@ -49,13 +50,15 @@ def period_len_fraction(p, q):
     >>> period_len_fraction(1, 97)
     96
     """
-    assert p == 1, "Sorry only 1 allowed for numerator."
-    if not (gcd(p, q) == 1 and gcd(10, q) == 1):
+    try:
+        assert p == 1, "Sorry only 1 allowed for numerator."
         # A fraction in lowest terms with a prime denominator other than 2 or 5
-        # (i.e. coprime to 10) always produces a repeating decimal,
-        # thus if this is not the case return 0
+        # (i.e. coprime to 10) always produces a repeating decimal
+        assert gcd(p, q) == 1, "This fraction is not expressed in it's lowest terms."
+        assert gcd(10, q) == 1, "This fraction will not result in repeating decimals."
+        return multi_order(10, q)
+    except:
         return 0
-    return multi_order(10, q)
 
 def lcm(a, b):
     """ Calculate the least common multiple """
