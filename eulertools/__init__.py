@@ -19,3 +19,15 @@ def fibonacci(n=4000000):
         yield a
         a, b = b, a+b
 
+def triangle_numbers(limit=100, start=1):
+    """
+    Generator for Triangle numbers
+
+    >>> list(triangle_numbers(7))
+    [1, 3, 6, 10, 15, 21, 28]
+    >>> list(triangle_numbers(7, 4))
+    [10, 15, 21, 28]
+    """
+    for n in range(start, limit+1):
+        yield (n*(n+1))//2
+
