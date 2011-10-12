@@ -1,25 +1,28 @@
 # vim: sw=4:ts=4:et:ai
 
-def main():
-    def func(n):
+def calc_collatz(c, n):
+    if n not in c:
         if n % 2 == 0:
-            return n/2
+            # Even
+            c[n] = calc_collatz(c, n//2) + 1
         else:
-            return 3*n + 1
+            # Odd
+            c[n] = calc_collatz(c, (3*n + 1)//2) + 2
+    return c[n]
 
-    longest_chain = None
-    longest_start = None
-    for i in range(1000000):
-        count = 0
-        n = i
-        while n > 1:
-            n = func(n)
-            count += 1
-        if not longest_chain or count > longest_chain:
-            longest_chain = count
-            longest_start = i
-    return longest_start
+def main():
+    collatz = {1:1}
+    max_chain = 0
+    max_i = None
+    for i in range(999999, 750000, -2):
+        n = calc_collatz(collatz, i)
+        if max_chain < n:
+            max_chain = n
+            max_i = i
+    return max_i
 
 if __name__ == '__main__':
+    #import cProfile
+    #cProfile.run('main()')
     print("Result: %i" % main())
 
