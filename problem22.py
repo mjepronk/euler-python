@@ -15,6 +15,6 @@ def main():
     return sum_of_names
 
 if __name__ == '__main__':
-    print("Result is: %i" % main())
+    print("Result: %i" % main())
 
 

@@ -34,6 +34,8 @@ def grootste_palindroom(aantal_cijfers):
 
     return grootste_palindroom
 
+def main(n=3):
+    return grootste_palindroom(3)
 
 if __name__ == '__main__':
     import doctest

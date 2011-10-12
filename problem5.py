@@ -2,14 +2,14 @@
 
 from eulertools import lcm
 
-def main(n):
+def main(n=20):
     """
     >>> main(5)
-    60.0
+    60
     >>> main(10)
-    2520.0
+    2520
     >>> main(20)
-    232792560.0
+    232792560
     """
     num = lcm(1, 2)
     for i in range(2, n+1):

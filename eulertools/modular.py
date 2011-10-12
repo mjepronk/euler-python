@@ -22,20 +22,20 @@ def multi_order(a, m):
     >>> multi_order(4, 7)
     3
     """
-    def multi_order1(a, (p, e)):
+    def multi_order1(a, p, e):
         m = p**e
         # Calculate Phi(p**e) where p prime
         t = (p-1)*(p**(e-1))
         qs = [1,]
         for f in prime_factors_with_e(t).iteritems():
-            qs = [q * f[0]**j for j in xrange(1+f[1]) for q in qs]
+            qs = [q * f[0]**j for j in range(1+f[1]) for q in qs]
         qs.sort()
         for q in qs:
             if pow(a, q, m) == 1: break
         return q
 
     assert gcd(a, m) == 1
-    mofs = (multi_order1(a, r) for r in prime_factors_with_e(m).iteritems())
+    mofs = (multi_order1(a, p, e) for p, e in prime_factors_with_e(m).iteritems())
     return reduce(lcm, mofs, 1)
 
 def period_len_fraction(p, q):

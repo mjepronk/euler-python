@@ -11,21 +11,30 @@ Approach:
 """
 import itertools
 from math import factorial
-from eulertools import combinations
 
-n = 20
+def brute_force(n):
+    """
+    Brute force method, for large n this takes a very long time.
+    Calculate the number of unique permutations for 20 times RIGHT and 20 times DOWN
+    """
+    routes = set(''.join(r) for r in itertools.permutations('R' * n + 'D' * n, n*2))
+    return len(routes)
 
-# Brute force:
-# Calculate the number of unique permutations for 20 times RIGHT and 20 times DOWN
-#routes = set(''.join(r) for r in itertools.permutations('R' * n + 'D' * n, n*2))
-#print "Result: %i" % len(routes)
+def multiset_permutations(n):
+    """
+    If M is a finite multiset, then a multiset permutation is a sequence of
+    elements of M in which each element appears exactly as often as is its
+    multiplicity in M. If the multiplicities of the elements of M (taken in some
+    order) are m1, m2, ..., ml and their sum (i.e., the size of M) is n, then the
+    number of multiset permutations of M is given by the multinomial coefficient:
+    """
+    num_routes = factorial(n*2) // (factorial(n) * factorial(n))
+    return num_routes
 
-# Better:
-# If M is a finite multiset, then a multiset permutation is a sequence of
-# elements of M in which each element appears exactly as often as is its
-# multiplicity in M. If the multiplicities of the elements of M (taken in some
-# order) are m1, m2, ..., ml and their sum (i.e., the size of M) is n, then the
-# number of multiset permutations of M is given by the multinomial coefficient:
-num_routes = factorial(n*2) // (factorial(n) * factorial(n))
-print "Result: %i" % num_routes
+def main(n=20):
+    # return brute_force(n)
+    return multiset_permutations(n)
+
+if __name__ == '__main__':
+    print("Result: %i" % main())
 

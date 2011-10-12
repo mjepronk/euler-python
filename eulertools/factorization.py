@@ -23,7 +23,7 @@ def factors(n):
     """ 
     top = int(sqrt(n))
     l = []
-    for i in xrange(1, top+1):
+    for i in range(1, top+1):
         if n % i  == 0:
             if not (i == top and top*top == n):
                 l.append(i)
@@ -46,7 +46,7 @@ def num_factors(n):
     """
     top = int(sqrt(n))
     num_divisors = 0
-    for i in xrange(1, top+1):
+    for i in range(1, top+1):
         if n % i == 0:
             num_divisors += 2
     # Correction if the number is a perfect square

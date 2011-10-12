@@ -31,7 +31,7 @@ def primes_upto(n):
     sieve = list(range(n+1))
     sieve[1] = 0
 
-    for i in xrange(2, nroot+1):
+    for i in range(2, nroot+1):
         if sieve[i] != 0:
             m = n//i - i
             sieve[i*i: n+1:i] = [0] * (m+1)

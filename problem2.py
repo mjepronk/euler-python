@@ -2,6 +2,8 @@
 
 from eulertools import fibonacci
 
-result = sum([i for i in fibonacci() if i % 2 == 0])
+def main():
+    return sum([i for i in fibonacci() if i % 2 == 0])
 
-print("Result: %i" % result)
+if __name__ == '__main__':
+    print("Result: %i" % main())

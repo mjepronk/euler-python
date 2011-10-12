@@ -56,13 +56,13 @@ def number_to_words(n, sep=' '):
     words = []
 
     # Convert the thousands
-    r, n = n/1000, n%1000
+    r, n = n//1000, n%1000
     if r > 0:
         words.append(ones[r])
         words.append('thousand')
 
     # Convert the hundreds
-    r, n = n/100, n%100
+    r, n = n//100, n%100
     if r > 0:
         words.append(ones[r])
         words.append('hundred')
@@ -75,7 +75,7 @@ def number_to_words(n, sep=' '):
     if n < 20:
         words.append(ones[n])
     else:
-        r, n = n/10, n%10
+        r, n = n//10, n%10
         words.append(tens[r])
         words.append(ones[n])
         
@@ -92,9 +92,12 @@ def length_in_words(n):
     words = number_to_words(n, sep='')
     return len(words)
 
+def main():
+    return sum(length_in_words(n) for n in range(1, 1001))
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
 
-    print("Result: %i" % sum(length_in_words(n) for n in range(1, 1001)))
+    print("Result: %i" % main())
 

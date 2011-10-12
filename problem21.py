@@ -4,7 +4,7 @@ from eulertools import factors
 
 def main():
     result = 0
-    test_numbers = range(1, 10000)
+    test_numbers = list(range(1, 10000))
     for i in test_numbers:
         a = sum(list(factors(i))[:-1])
         b = sum(list(factors(a))[:-1])
@@ -14,5 +14,5 @@ def main():
     return result
 
 if __name__ == '__main__':
-    print "Result: %i" % main()
+    print("Result: %i" % main())
 

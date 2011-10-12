@@ -1,13 +1,10 @@
 # vim: sw=4:ts=4:et:ai
-from eulertools import is_prime
+import itertools
+from eulertools import primes_upto
 
-i = 1
-count = 0
-while True:
-    if is_prime(i):
-        count += 1
-        if count == 10001:
-            print("10.001ste priemgetal is: %i" % i)
-            break
-    i += 1
+def main():
+    return next(itertools.islice(primes_upto(200000), 10000, None))
+
+if __name__ == '__main__':
+    print("Result: %i" % main())
 

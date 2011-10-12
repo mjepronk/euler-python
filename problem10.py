@@ -2,6 +2,9 @@
 
 from eulertools import primes_upto
 
-result = sum(primes_upto(2000000))
+def main():
+    return sum(primes_upto(2000000))
 
-print("Result: %i" % result)
+if __name__ == '__main__':
+    print("Result: %i" % main())
+
