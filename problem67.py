@@ -9,9 +9,8 @@ Approach:
 from eulertools.a_star import AStarPyramid
 
 def main(debug=False):
-    fp = open('resources/triangle.txt', 'r')
     pyramid = []
-    for line in fp:
+    for line in open('resources/triangle.txt', 'r'):
         row = [int(n) for n in line.split(' ')]
         pyramid.append(row)
 

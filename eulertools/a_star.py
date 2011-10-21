@@ -233,3 +233,40 @@ class AStarPyramid(AStarAlgorithm):
             print(' '.join(line))
         print('')
 
+
+class AStarMatrix(AStarAlgorithm):
+    """ Class that implements A* methods for the Matrix problem """
+
+    def __init__(self, matrix):
+        self.matrix = matrix
+        self.num_rows = len(matrix)
+        self.num_cols = len(matrix[0])
+        super(AStarMatrix, self).__init__()
+
+    def neighbor_nodes(self, node):
+        """
+        Generator for the nodes that can be accessed from this node.
+        """
+        row = node[0]
+        col = node[1]
+        if row < (self.num_rows - 1):
+            # We can still go down
+            yield (row + 1, col)
+        if col < (self.num_cols - 1):
+            # We can still go to the right
+            yield (row, col + 1)
+
+    def is_goal_node(self, node):
+        """
+        A node is a goal node if it's the bottom right node.
+        """
+        return node[0] == self.num_rows - 1 and node[1] == self.num_cols - 1
+
+    def dist_between(self, node, other_node):
+        """
+        Distance between two neighbouring nodes.
+        """
+        row = other_node[0]
+        col = other_node[1]
+        return self.matrix[row][col]
+
