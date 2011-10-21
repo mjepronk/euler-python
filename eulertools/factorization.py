@@ -1,6 +1,8 @@
 # vim: sw=4:ts=4:et:ai
 from __future__ import division
+import operator
 from math import sqrt, ceil, factorial
+from functools import reduce
 
 from eulertools.prime import primes_upto
 
@@ -58,9 +60,9 @@ def prime_factors(n, largest_to_lowest=False):
     """
     Generator for the prime factors of n
 
-    >>> prime_factors(13195, True).next()
+    >>> next(prime_factors(13195, True))
     29
-    >>> prime_factors(600851475143, True).next()
+    >>> next(prime_factors(600851475143, True))
     6857
     """
     primes = list(primes_upto(int(sqrt(n))))
@@ -98,11 +100,11 @@ def prime_factors_with_e(n):
     primes = primes_upto(n)
     while True:
         try:
-            test_prime = primes.next()
+            test_prime = next(primes)
         except StopIteration:
             break
         if n % test_prime == 0:
-            if factor_dict.has_key(test_prime):
+            if test_prime in factor_dict:
                 factor_dict[test_prime] += 1
             else:
                 factor_dict[test_prime] = 1
@@ -121,4 +123,20 @@ def prime_factors_with_e2(a):
         if a < p*p: break
     if a > 1:
         yield (a,1)
+
+def phi(n):
+    """
+    Implements Euler's totient function.
+
+    >>> phi(0)
+    1
+    >>> phi(12)
+    4
+    >>> phi(17)
+    16
+    >>> phi(103)
+    102
+    """
+    if n in (0, 1): return 1
+    return reduce(operator.mul, ((p-1) * p**(e-1) for p, e in prime_factors_with_e(n).items()))
 

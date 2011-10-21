@@ -9,9 +9,9 @@ def is_triangle_word(word, triangle_numbers):
 def main():
     # Generate a list of the first n triangle numbers
     n = 1
-    triangle_numbers = []
+    triangle_numbers = set()
     for i in range(2, 1000):
-        triangle_numbers.append(n)
+        triangle_numbers.add(n)
         n += i
 
     # Loop over the words in the file and count the number of triangle words
