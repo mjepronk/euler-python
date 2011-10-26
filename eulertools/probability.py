@@ -9,9 +9,9 @@ def num_combinations(n, k):
     (unlike permutations) order does not matter)
 
     >>> num_combinations(41, 6)
-    4496388L
+    4496388
     >>> num_combinations(52, 5)
-    2598960L
+    2598960
     """
     if k > n:
         return 0

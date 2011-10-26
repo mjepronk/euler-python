@@ -1,6 +1,8 @@
 # vim: sw=4:ts=4:et:ai
 from __future__ import division
+import operator
 from fractions import gcd
+from functools import reduce
 
 from eulertools.factorization import prime_factors_with_e
 
@@ -27,7 +29,7 @@ def multi_order(a, m):
         # Calculate Phi(p**e) where p prime
         t = (p-1)*(p**(e-1))
         qs = [1,]
-        for f in prime_factors_with_e(t).iteritems():
+        for f in prime_factors_with_e(t):
             qs = [q * f[0]**j for j in range(1+f[1]) for q in qs]
         qs.sort()
         for q in qs:
@@ -35,8 +37,24 @@ def multi_order(a, m):
         return q
 
     assert gcd(a, m) == 1
-    mofs = (multi_order1(a, p, e) for p, e in prime_factors_with_e(m).iteritems())
+    mofs = (multi_order1(a, p, e) for p, e in prime_factors_with_e(m).items())
     return reduce(lcm, mofs, 1)
+
+def phi(n):
+    """
+    Implements Euler's totient function.
+
+    >>> phi(0)
+    1
+    >>> phi(12)
+    4
+    >>> phi(17)
+    16
+    >>> phi(103)
+    102
+    """
+    if n in (0, 1, 2): return 1
+    return reduce(operator.mul, ((p-1) * p**(e-1) for p, e in prime_factors_with_e(n)))
 
 def period_len_fraction(p, q):
     """

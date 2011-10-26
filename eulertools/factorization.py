@@ -1,10 +1,8 @@
 # vim: sw=4:ts=4:et:ai
 from __future__ import division
-import operator
 from math import sqrt, ceil, factorial
-from functools import reduce
 
-from eulertools.prime import primes_upto
+from eulertools.prime import primes_upto, primes_erat
 
 def factors(n):
     """ 
@@ -87,7 +85,7 @@ def prime_factors2(n):
             primeind += 1
             p = primes[primeind]
 
-def prime_factors_with_e(n):
+def prime_factors_with_e2(n):
     """
     Factorize n in prime factors with their exponent.
     Returns a dictionary with the prime factors as keys,
@@ -97,7 +95,7 @@ def prime_factors_with_e(n):
     {2: 2, 3: 2}
     """
     factor_dict = {}
-    primes = primes_upto(n)
+    primes = primes_erat()
     while True:
         try:
             test_prime = next(primes)
@@ -108,35 +106,26 @@ def prime_factors_with_e(n):
                 factor_dict[test_prime] += 1
             else:
                 factor_dict[test_prime] = 1
-            primes = primes_upto(n)
+            primes = primes_erat()
             n = n // test_prime
     return factor_dict
 
-def prime_factors_with_e2(a):
-    for p in primes():
+def prime_factors_with_e(n):
+    """
+    Factorize n in prime factors with their exponent.
+    Implemented as a generator that returns tuples of prime and exponent.
+
+    >>> list(prime_factors_with_e(36))
+    [(2, 2), (3, 2)]
+    """
+    for p in primes_erat():
         j = 0
-        while a%p == 0:
-            a /= p
+        while n%p == 0:
+            n //= p
             j += 1
         if j > 0:
             yield (p,j)
-        if a < p*p: break
-    if a > 1:
-        yield (a,1)
-
-def phi(n):
-    """
-    Implements Euler's totient function.
-
-    >>> phi(0)
-    1
-    >>> phi(12)
-    4
-    >>> phi(17)
-    16
-    >>> phi(103)
-    102
-    """
-    if n in (0, 1): return 1
-    return reduce(operator.mul, ((p-1) * p**(e-1) for p, e in prime_factors_with_e(n).items()))
+        if n < p*p: break
+    if n > 1:
+        yield (n,1)
 

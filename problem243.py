@@ -1,7 +1,9 @@
 # vim: sw=4:ts=4:et:ai
-
+from math import sqrt, floor, ceil
 from fractions import Fraction, gcd
-from eulertools import phi
+from eulertools import phi, primes_upto, primes_erat
+from functools import reduce
+import operator
 
 
 def ratio_resilient_fractions(d):
@@ -20,27 +22,41 @@ def ratio_resilient_fractions(d):
     >>> ratio_resilient_fractions(97327)
     Fraction(1, 1)
     """
-    num = 0
-    for i in range(1, d):
-        # For every proper fraction...
-        if gcd(i, d) == 1:
-            # If the numerator and the denominator are coprime,
-            # than the fraction is "resilient"...
-            num += 1
-    return Fraction(num, d-1)    
+    return Fraction(phi(d), d-1)    
 
 def main(smaller_than=None):
     if not smaller_than:
         smaller_than = Fraction(15499, 94744)
-    d = 2
-    while True:
-        ratio = Fraction(phi(d), d-1)
+    # We know that phi(n)/n is the smallest when n is a primorial,
+    # so first look for Phi(priomorial)/primorial which is smaller than our
+    # target faction.
+    primorial = 1
+    prime_list = []
+    for prime in primes_erat():
+        primorial *= prime
+        prime_list.append(prime)
+        phi_primorial = reduce(operator.mul, ((p-1) for p in prime_list))
+        ratio = Fraction(phi_primorial, primorial)
+        print(primorial, ratio)
         if ratio < smaller_than:
             break
-        d += 1
-    return d
+    #return primorial
+    # Then search for Phi(n)/n-1 which is smaller than our target fraction.
+    found = False
+    for n in range(primorial, primorial+100000):
+        ratio = Fraction(phi(n), n-1)
+        if n % 1000 == 0:
+            print(n, ratio)
+        if ratio < smaller_than:
+            found = True
+            break
+    if found:
+        return n
+    else:
+        return 0
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
     print("Result: %i" % main())
+
