@@ -1,20 +1,12 @@
 # vim: sw=4:ts=4:et:ai
-from collections import deque
 import heapq
-from eulertools import factorial
-
-
-def pentagonals(start=1):
-    n = start
-    while True:
-        yield n * (3 * n - 1) // 2
-        n += 1
+from eulertools import pentagonal_numbers
 
 def main():
     penta_set = set()
     inspect_queue = []
     heapq.heapify(inspect_queue)
-    for a in pentagonals():
+    for a in pentagonal_numbers():
         for b in penta_set:
             difference = a - b
             if difference in penta_set:

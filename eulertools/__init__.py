@@ -36,6 +36,30 @@ def triangle_numbers(start=1):
         i += 1
         n += i
 
+def pentagonal_numbers(start=1):
+    """
+    Generator for Pentagonal numbers
+
+    >>> list(itertools.takewhile(lambda n: n < 150, pentagonal_numbers()))
+    [1, 5, 12, 22, 35, 51, 70, 92, 117, 145]
+    """
+    n = start
+    while True:
+        yield n * (3 * n - 1) // 2
+        n += 1
+
+def hexagonal_numbers(start=1):
+    """
+    Generator for Hexagonal numbers
+
+    >>> list(itertools.takewhile(lambda n: n < 200, hexagonal_numbers()))
+    [1, 6, 15, 28, 45, 66, 91, 120, 153, 190]
+    """
+    n = start
+    while True:
+        yield n * (2 * n - 1)
+        n += 1
+
 def primorials():
     """
     Generator for Primorials
