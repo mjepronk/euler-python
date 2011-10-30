@@ -7,6 +7,32 @@ from eulertools.modular import *
 from eulertools.prime import *
 from eulertools.probability import *
 
+
+def rotations(s):
+    """
+    Generator for all the rotations of s
+
+    >>> list(rotations('197'))
+    ['197', '971', '719']
+    """
+    s = str(s)
+    for i in range(len(s)):
+        yield s[i:] + s[:-len(s) + i]
+
+def is_palindromic(s):
+    """
+    Check if s is palindromic
+
+    >>> is_palindromic(9009)
+    True
+    >>> is_palindromic(12321)
+    True
+    >>> is_palindromic(1234)
+    False
+    """
+    s = str(s)
+    return ''.join(reversed(s)) == s
+
 def fibonacci():
     """
     Generator for the Fibonacci sequence
