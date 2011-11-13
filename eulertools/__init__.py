@@ -98,3 +98,21 @@ def primorials():
         primorial *= prime
         yield primorial
 
+
+def pythagorean_triples():
+    """ Generator for Pythogorean triples using Dicksons method """
+    def factor_pairs(n):
+        top = int(sqrt(n))
+        l = []
+        for i in range(1, top+1):
+            if n % i  == 0:
+                yield (i, n // i)
+    r = 1
+    while True:
+       for s, t in factor_pairs(r**2/2):
+            x = r + s
+            y = r + t
+            z = r + s + t
+            yield (int(x), int(y), int(z))
+       r += 1
+
