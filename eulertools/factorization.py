@@ -1,8 +1,9 @@
 # vim: sw=4:ts=4:et:ai
 from __future__ import division
+import itertools
 from math import sqrt, ceil, factorial
 
-from eulertools.prime import primes_upto, primes_erat
+from eulertools.prime import primes_erat
 
 def factors(n):
     """ 
@@ -63,7 +64,7 @@ def prime_factors(n, largest_to_lowest=False):
     >>> next(prime_factors(600851475143, True))
     6857
     """
-    primes = list(primes_upto(int(sqrt(n))))
+    primes = list(itertools.takewhile(lambda p: p < int(sqrt(n)), primes_erat()))
     if largest_to_lowest:
         primes.reverse()
     for prime in primes:
@@ -75,7 +76,7 @@ def prime_factors2(n):
     Generator for the prime factors of n
     """
     primeind = 0
-    primes = list(primes_upto(int(sqrt(n))))
+    primes = list(itertools.takewhile(lambda p: p < int(sqrt(n)), primes_erat()))
     p = primes[primeind]
     while p <= n:
         if n % p == 0:
@@ -84,31 +85,6 @@ def prime_factors2(n):
         else:
             primeind += 1
             p = primes[primeind]
-
-def prime_factors_with_e2(n):
-    """
-    Factorize n in prime factors with their exponent.
-    Returns a dictionary with the prime factors as keys,
-    and their exponents as values.
-
-    >>> prime_factors_with_e(36)
-    {2: 2, 3: 2}
-    """
-    factor_dict = {}
-    primes = primes_erat()
-    while True:
-        try:
-            test_prime = next(primes)
-        except StopIteration:
-            break
-        if n % test_prime == 0:
-            if test_prime in factor_dict:
-                factor_dict[test_prime] += 1
-            else:
-                factor_dict[test_prime] = 1
-            primes = primes_erat()
-            n = n // test_prime
-    return factor_dict
 
 def prime_factors_with_e(n):
     """

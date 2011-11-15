@@ -1,11 +1,10 @@
 # vim: sw=4:ts=4:et:ai
-
 import itertools
-from eulertools import primes_upto
+from eulertools import primes_erat
 
 def main():
     results = {}
-    for prime in primes_upto(9999):
+    for prime in itertools.takewhile(lambda p: p < 9999, primes_erat()):
         if prime >= 1000:
             number_hash = ''.join(sorted(x for x in str(prime)))
             if not results.get(number_hash, False):

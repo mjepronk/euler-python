@@ -1,7 +1,7 @@
 # vim: sw=4:ts=4:et:ai
-
+import itertools
 from functools import reduce
-from eulertools import period_len_fraction, primes_upto
+from eulertools import period_len_fraction, primes_erat
 
 def main():
     def tup_max(a, b):
@@ -10,7 +10,7 @@ def main():
         else:
             return b
 
-    return reduce(tup_max, ((p, period_len_fraction(1, p)) for p in primes_upto(1000)))[0]
+    return reduce(tup_max, ((p, period_len_fraction(1, p)) for p in itertools.takewhile(lambda p: p < 1000, primes_erat())))[0]
 
 if __name__ == '__main__':
     import doctest

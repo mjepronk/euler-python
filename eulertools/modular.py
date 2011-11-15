@@ -37,7 +37,7 @@ def multi_order(a, m):
         return q
 
     assert gcd(a, m) == 1
-    mofs = (multi_order1(a, p, e) for p, e in prime_factors_with_e(m).items())
+    mofs = (multi_order1(a, p, e) for p, e in prime_factors_with_e(m))
     return reduce(lcm, mofs, 1)
 
 def phi(n):
