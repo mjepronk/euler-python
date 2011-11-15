@@ -5,7 +5,6 @@ from math import ceil
 def main():
     pandigital = list(range(1, 10))
     products_found = set()
-    print("Pandigital %s" % pandigital)
     for a in range(1, 99):
         if a % 10 == 0 or a % 11 == 0:
             # Skip powers of 10 and 11
@@ -18,7 +17,6 @@ def main():
             digits = '%i%i%i' % (a, b, product)
             digits = sorted(int(d) for d in digits)
             if digits == pandigital:
-                print("%i x %i = %i" % (a, b, product))
                 products_found.add(product)
     return sum(product for product in products_found)
 
